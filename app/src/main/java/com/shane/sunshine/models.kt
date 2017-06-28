@@ -1,5 +1,6 @@
 package com.shane.sunshine
 
+import java.io.Serializable
 import java.util.*
 
 /**
@@ -14,7 +15,4 @@ data class Weather(
         val humidity: Double,
         val pressure: Double,
         val windSpeed: Double,
-        val windDegree: Double)
-
-fun Long.toDate() = Date(this * 1000)
-fun Int.toDate() = this.toLong().toDate()
+        val windDegree: Double) : Serializable

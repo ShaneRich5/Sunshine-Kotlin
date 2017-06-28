@@ -1,12 +1,12 @@
 package com.shane.sunshine
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
     val TAG = MainActivity::class.java.canonicalName
@@ -16,13 +16,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        Log.i(TAG, "Demo Data")
-        Log.i(TAG, demoData().toString())
+        val layoutManager = LinearLayoutManager(applicationContext)
+        val adapter = WeatherAdapter(demoData())
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+        weather_recycler_view.layoutManager = layoutManager
+        weather_recycler_view.adapter = adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -32,10 +30,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-
-        if (id == R.id.action_settings) {
-            return true
+        when (item.itemId) {
+            R.id.action_settings -> {
+                return true
+            }
+            R.id.action_refresh -> {
+                return true
+            }
         }
 
         return super.onOptionsItemSelected(item)
@@ -67,7 +68,6 @@ class MainActivity : AppCompatActivity() {
                     windDegree=windDegree)
             weatherItems.add(weather)
         }
-
 
         return weatherItems
     }
