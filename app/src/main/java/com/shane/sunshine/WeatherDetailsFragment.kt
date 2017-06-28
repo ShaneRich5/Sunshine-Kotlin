@@ -3,9 +3,8 @@ package com.shane.sunshine
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import kotlinx.android.synthetic.main.fragment_weather_details.view.*
 
 class WeatherDetailsFragment : Fragment() {
 
@@ -18,17 +17,11 @@ class WeatherDetailsFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-
-        val rootView = inflater!!.inflate(R.layout.fragment_weather_details, container, false)
-        val humidityTextView = rootView.findViewById(R.id.humidity) as TextView
-
-
-        humidityTextView.text = "Humity: ${weather.humidity}"
-
-
-        return rootView
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?)
+            = container!!.inflate(R.layout.fragment_weather_details).apply {
+        humidity.text = "${weather.humidity}"
+        low_temperature.text = "${weather.lowTemperature}"
+        high_temperature.text = "${weather.highTemperature}"
     }
 
     companion object {

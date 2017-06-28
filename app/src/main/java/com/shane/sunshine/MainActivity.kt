@@ -20,11 +20,11 @@ class MainActivity : AppCompatActivity() {
         val adapter = WeatherAdapter(demoData())
 
         weather_recycler_view.layoutManager = layoutManager
+        weather_recycler_view.addItemDecoration(DividerItemDecoration(this))
         weather_recycler_view.adapter = adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
@@ -37,9 +37,8 @@ class MainActivity : AppCompatActivity() {
             R.id.action_refresh -> {
                 return true
             }
+            else -> return super.onOptionsItemSelected(item)
         }
-
-        return super.onOptionsItemSelected(item)
     }
 
     fun demoData() : List<Weather> {
