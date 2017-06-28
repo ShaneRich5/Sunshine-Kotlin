@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.fragment_weather_details.view.*
 /**
  * Created by Shane on 6/27/2017.
  */
-class WeatherAdapter(val weatherList : List<Weather>) : RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
+class WeatherAdapter(val weatherList : List<Weather>, val itemClick: (Weather) -> Unit) : RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = WeatherViewHolder(parent)
 
@@ -24,7 +24,7 @@ class WeatherAdapter(val weatherList : List<Weather>) : RecyclerView.Adapter<Wea
                 low_temperature.text = weather.lowTemperature.toString()
                 high_temperature.text = weather.highTemperature.toString()
                 icon.loadImage(weather.icon)
-
+                this.setOnClickListener { itemClick(weather) }
             }
         }
     }

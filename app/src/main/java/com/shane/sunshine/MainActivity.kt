@@ -16,8 +16,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val layoutManager = LinearLayoutManager(applicationContext)
-        val adapter = WeatherAdapter(demoData())
+        val layoutManager = LinearLayoutManager(this)
+        val adapter = WeatherAdapter(demoData()){
+            val fragment = WeatherDetailsFragment.newInstance(it)
+            val fragmentManager = supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.add(android.R.id.content, fragment)
+            fragmentTransaction.commit()
+        }
 
         weather_recycler_view.layoutManager = layoutManager
         weather_recycler_view.addItemDecoration(DividerItemDecoration(this))
