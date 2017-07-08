@@ -26,6 +26,9 @@ android {
     kapt {
         generateStubs = true
     }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 
 dependencies {
